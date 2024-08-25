@@ -1,8 +1,9 @@
-import {Dimensions} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
 export const {width, height} = Dimensions.get('window');
 export const colors = {
   BG: '#1F2A63',
+  BG2: '#2F3F96',
   TEXT_TITLE: '#212121',
   ORANGE: '#FF6900',
   INACTIVE_TEXT: '#9E9E9E',
@@ -11,7 +12,6 @@ export const colors = {
   BLACK21: '#212121',
   WHITE: '#FFFFFF',
   BORDER_GRAY: '#E0E0E0',
-  BG2: '#F4F4F4',
   SLIDE_COLOR: '#D0D0D0',
   GREEEN: '#45B828',
   YELLOW: '#FFC107',
@@ -39,3 +39,30 @@ export const colors = {
   GUYABANO: '#F8F8F8',
   GRAY_DARK: '#606060',
 };
+
+export const stylesConst = StyleSheet.create({
+  shadow: {
+    elevation: 1,
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 0,
+      width: 0,
+    },
+  },
+  text_title_32m: {
+    fontSize: 32,
+    fontWeight: '500',
+    color: colors.TEXT_TITLE,
+  },
+  text_title_22m: {
+    fontSize: 22,
+    fontWeight: '500',
+    color: colors.TEXT_TITLE,
+  },
+  text_title_22r: {
+    fontSize: 22,
+    fontWeight: '400',
+    color: colors.TEXT_TITLE,
+  },
+});

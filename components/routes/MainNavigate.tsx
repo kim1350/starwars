@@ -1,19 +1,23 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import MainScreen from '../screens/MainScreen';
-import Header from '../ui/Header';
 
-const Stack = createStackNavigator();
+import HomeScreen from '../screens/HomeScreen';
+import CharactersScreen from '../screens/CharactersScreen';
+import Header from '../ui/Header';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
 
 const MainNavigate = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        options={{header: () => <Header back={false} type="logo" />}}
-        name="mainScreen"
-        component={MainScreen}
-      />
-    </Stack.Navigator>
+    <Drawer.Navigator
+      screenOptions={{
+        header: () => <Header back={false} type="logo" rightAction />,
+        drawerPosition: 'right',
+      }}
+      initialRouteName="Home">
+      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Characters" component={CharactersScreen} />
+    </Drawer.Navigator>
   );
 };
 

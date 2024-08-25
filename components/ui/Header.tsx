@@ -1,24 +1,19 @@
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React, {type FC, Fragment, type ReactNode} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import React, {type FC, Fragment} from 'react';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import MyStatusBar from './MyStatusBar';
 import ArrowIcon from '../../assets/Arrow';
 import {colors} from '../../constants';
+import MenuIcon from '../../assets/MenuIcon';
 
-type HeaderType = 'logo' | 'title' | 'search';
-
-export interface HeaderAction {
-  Icon: ReactNode;
-  disabled?: boolean;
-  onPress?: () => void;
-}
+type HeaderType = 'logo' | 'title';
 
 interface HeaderProps {
   type?: HeaderType;
   title?: string | JSX.Element;
   back?: boolean;
   shadow?: boolean;
-  rightAction?: HeaderAction | null;
+  rightAction?: boolean;
   border?: boolean;
 }
 
@@ -28,11 +23,14 @@ const Header: FC<HeaderProps> = props => {
     title,
     back = true,
     shadow = true,
-    rightAction = null,
+    rightAction,
     border = true,
   } = props;
-  const {goBack} = useNavigation();
+  const {goBack, dispatch} = useNavigation();
 
+  const drawerMenuAction = () => {
+    dispatch(DrawerActions.openDrawer());
+  };
   return (
     <View
       style={[
@@ -53,6 +51,13 @@ const Header: FC<HeaderProps> = props => {
             />
 
             {title && <Text style={styles.logoTitle}>{title}</Text>}
+            {rightAction && (
+              <TouchableOpacity
+                onPress={drawerMenuAction}
+                style={styles.rightAction}>
+                <MenuIcon color={colors.WHITE} />
+              </TouchableOpacity>
+            )}
           </Fragment>
         )}
         {type === 'title' && (
@@ -78,11 +83,8 @@ const Header: FC<HeaderProps> = props => {
             ) : null}
 
             {rightAction && (
-              <TouchableOpacity
-                style={styles.rightAction}
-                disabled={rightAction.disabled}
-                onPress={rightAction.onPress}>
-                {rightAction.Icon ?? null}
+              <TouchableOpacity style={styles.rightAction}>
+                <MenuIcon />
               </TouchableOpacity>
             )}
           </Fragment>
