@@ -46,7 +46,7 @@ const Header: FC<HeaderProps> = props => {
             <Image
               width={66}
               height={40}
-              style={{height: 40, width: 66}}
+              style={styles.logoSize}
               source={require('../../assets/Logo.png')}
             />
 
@@ -152,8 +152,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
   },
-  inputContainer: {
-    width: '100%',
+  logoSize: {
+    height: 40,
+    width: 66,
   },
 });
 

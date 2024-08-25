@@ -4,8 +4,8 @@ import {colors, stylesConst} from '../../constants';
 
 const HomeScreen = () => {
   return (
-    <View style={{flex: 1, padding: 20, backgroundColor: colors.BG}}>
-      <View style={{gap: 16}}>
+    <View style={styles.container}>
+      <View style={styles.container2}>
         <Text style={styles.title}>Find all your favorite character</Text>
         <Text style={styles.text}>
           You can find out all the information about your favorite characters
@@ -25,5 +25,9 @@ const styles = StyleSheet.create({
   text: {
     ...stylesConst.text_title_22r,
     color: colors.WHITE,
+  },
+  container: {flex: 1, padding: 20, backgroundColor: colors.BG},
+  container2: {
+    gap: 16,
   },
 });
