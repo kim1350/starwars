@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {colors, stylesConst} from '../../constants';
 
@@ -11,28 +11,22 @@ const HomeScreen = () => {
           You can find out all the information about your favorite characters
         </Text>
       </View>
+      <TouchableOpacity style={styles.btn}>
+        <Text style={stylesConst.text_title_18m}>See more...</Text>
+      </TouchableOpacity>
       <View style={styles.containerImgs}>
         <Image
           source={require('../../assets/Cloud.png')}
           height={120}
           width={252}
-          style={{height: 120, width: 252, position: 'absolute', right: 0}}
+          style={styles.cloud1}
         />
 
-        <Image
-          source={require('../../assets/Yoda.png')}
-          style={{height: 320, aspectRatio: 1}}
-        />
+        <Image source={require('../../assets/Yoda.png')} style={styles.yoda} />
         <Image
           source={require('../../assets/Cloud.png')}
           resizeMode="contain"
-          style={{
-            height: 80,
-            width: 168,
-            position: 'absolute',
-            left: 0,
-            bottom: 0,
-          }}
+          style={styles.cloud2}
         />
       </View>
     </View>
@@ -56,8 +50,37 @@ const styles = StyleSheet.create({
   },
   containerImgs: {
     flex: 1,
-    gap: 8,
-    alignSelf: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 12,
+  },
+  cloud1: {
+    height: 120,
+    width: 252,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  },
+  cloud2: {
+    height: 80,
+    width: 168,
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+  },
+  yoda: {
+    height: 320,
+    width: 320,
+    position: 'relative',
+    zIndex: 2,
+  },
+  btn: {
+    marginTop: 22,
+    paddingVertical: 12,
+    justifyContent: 'center',
+    borderRadius: 12,
+    alignItems: 'center',
+    width: 200,
+    backgroundColor: colors.YELLOW,
   },
 });

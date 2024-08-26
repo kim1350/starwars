@@ -65,4 +65,9 @@ export const stylesConst = StyleSheet.create({
     fontWeight: '400',
     color: colors.TEXT_TITLE,
   },
+  text_title_18m: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: colors.TEXT_TITLE,
+  },
 });
