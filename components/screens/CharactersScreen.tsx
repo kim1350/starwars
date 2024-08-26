@@ -1,8 +1,20 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {colors, stylesConst} from '../../constants';
+import axiosInstance from '../../hooks/api';
 
 const CharactersScreen = () => {
+  const getPeoples = async () => {
+    try {
+      const res = await axiosInstance.get('people/');
+      console.log(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getPeoples();
+  }, []);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
