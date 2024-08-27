@@ -1,6 +1,6 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {colors, stylesConst} from '../../constants';
+import {colors, stylesConst} from '../../../constants';
 
 const HomeScreen = () => {
   return (
@@ -16,15 +16,18 @@ const HomeScreen = () => {
       </TouchableOpacity>
       <View style={styles.containerImgs}>
         <Image
-          source={require('../../assets/Cloud.png')}
+          source={require('../../../assets/Cloud.png')}
           height={120}
           width={252}
           style={styles.cloud1}
         />
 
-        <Image source={require('../../assets/Yoda.png')} style={styles.yoda} />
         <Image
-          source={require('../../assets/Cloud.png')}
+          source={require('../../../assets/Yoda.png')}
+          style={styles.yoda}
+        />
+        <Image
+          source={require('../../../assets/Cloud.png')}
           resizeMode="contain"
           style={styles.cloud2}
         />

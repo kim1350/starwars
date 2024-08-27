@@ -28,13 +28,13 @@ interface personSilce {
   data: Person[];
   loadData: boolean;
   error: string | null;
-  count: number;
+  next: string | null;
 }
 const initialState: personSilce = {
   data: [],
   loadData: false,
   error: null,
-  count: 0,
+  next: null,
 };
 const presonSlice = createSlice({
   name: 'person',
@@ -52,16 +52,16 @@ const presonSlice = createSlice({
         state.loadData = true;
       })
       .addCase(getPersons.fulfilled, (state, action) => {
-        state.count = action.payload.count;
+        state.next = action.payload.next;
+        state.loadData = false;
         if (action.meta.arg == 1) {
           state.data = action.payload.results;
         } else {
           state.data = [...state.data, ...action.payload.results];
         }
-
-        state.loadData = false;
       })
       .addCase(getPersons.rejected, (state, action) => {
+        state.loadData = true;
         state.error = action.payload ?? 'Неизвестная ошибка';
       });
   },
