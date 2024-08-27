@@ -3,7 +3,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 export const {width, height} = Dimensions.get('window');
 export const colors = {
   BG: '#1F2A63',
-  BG2: '#2F3F96',
+  BG2: '#F0F0F0',
   TEXT_TITLE: '#212121',
   ORANGE: '#FF6900',
   INACTIVE_TEXT: '#9E9E9E',
