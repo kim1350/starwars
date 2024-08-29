@@ -23,8 +23,7 @@ const ModalPerson: FC<ModalProps> = ({item, isVisible, setVisible}) => {
     female: colors.PURPLE,
     hermaphrodite: colors.YELLOW,
   };
-  console.log(item?.gender);
-  console.log(genderUrl[item?.gender as keyof typeof genderUrl]);
+
   return (
     <Modal
       useNativeDriver={true}
@@ -142,20 +141,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE,
   },
   cont2: {
+    paddingVertical: 12,
     flex: 1,
     backgroundColor: colors.BLUE_DARK2,
     borderTopRightRadius: 12,
     borderBottomRightRadius: 12,
-
+    paddingHorizontal: 12,
     gap: 12,
   },
   cont1: {
     flex: 1,
-    justifyContent: 'center',
+    paddingHorizontal: 12,
+    justifyContent: 'flex-end',
     backgroundColor: colors.BLUE_DARK,
     borderTopLeftRadius: 12,
     borderBottomLeftRadius: 12,
-
+    paddingVertical: 12,
     gap: 12,
   },
   titleContainer: {

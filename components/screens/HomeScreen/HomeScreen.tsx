@@ -2,7 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {colors, stylesConst} from '../../../constants';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.container2}>
@@ -11,7 +11,11 @@ const HomeScreen = () => {
           You can find out all the information about your favorite characters
         </Text>
       </View>
-      <TouchableOpacity style={styles.btn}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('Characters');
+        }}
+        style={styles.btn}>
         <Text style={stylesConst.text_title_18m}>See more...</Text>
       </TouchableOpacity>
       <View style={styles.containerImgs}>
