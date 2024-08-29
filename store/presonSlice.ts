@@ -15,7 +15,7 @@ export const getPersons = createAsyncThunk<
 >('person/getPersons', async (page, {rejectWithValue}) => {
   try {
     const response = await axiosInstance.get(`/people/?page=${page}`);
-    console.log(response.data);
+
     return response.data;
   } catch (error: any) {
     return rejectWithValue(
@@ -26,12 +26,14 @@ export const getPersons = createAsyncThunk<
 
 interface personSilce {
   data: Person[];
+  fiterData: Person[];
   loadData: boolean;
   error: string | null;
   next: string | null;
 }
 const initialState: personSilce = {
   data: [],
+  fiterData: [],
   loadData: false,
   error: null,
   next: null,
@@ -40,9 +42,14 @@ const presonSlice = createSlice({
   name: 'person',
   initialState,
   reducers: {
-    addDataActivity(state, action: PayloadAction<any>) {
-      if (action.payload.meta.current_page === 1) {
+    filterPersons(state, action: PayloadAction<string>) {
+      const eyeColor = action.payload;
+      if (eyeColor === 'all') {
+        state.fiterData = state.data;
       } else {
+        state.fiterData = state.data.filter(
+          person => person.eye_color === eyeColor,
+        );
       }
     },
   },
@@ -57,7 +64,7 @@ const presonSlice = createSlice({
         if (action.meta.arg == 1) {
           state.data = action.payload.results;
         } else {
-          state.data = [...state.data, ...action.payload.results];
+          state.data = state.data.concat(action.payload.results);
         }
       })
       .addCase(getPersons.rejected, (state, action) => {
@@ -66,6 +73,6 @@ const presonSlice = createSlice({
       });
   },
 });
-export const {addDataActivity} = presonSlice.actions;
+export const {filterPersons} = presonSlice.actions;
 
 export default presonSlice.reducer;
