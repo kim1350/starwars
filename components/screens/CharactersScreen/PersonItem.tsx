@@ -6,7 +6,12 @@ interface IPersonItem {
   item: Person;
   index: number;
 }
-const PersonItem = ({item, index}: IPersonItem) => {
+const PersonItem = ({item}: IPersonItem) => {
+  const genderColor = {
+    male: colors.GREEN,
+    female: colors.PURPLE,
+    hermaphrodite: colors.YELLOW,
+  };
   return (
     <View style={styles.personItem}>
       <Text style={stylesConst.text_title_18m}>{item.name}</Text>
@@ -24,7 +29,27 @@ const PersonItem = ({item, index}: IPersonItem) => {
           <Text>mass</Text>
         </View>
       </View>
-      <Text>{item?.gender}</Text>
+      <View style={styles.tagContainer}>
+        {item?.gender != 'n/a' && (
+          <View
+            style={{
+              ...styles.genderContainer,
+              backgroundColor:
+                genderColor[item.gender as keyof typeof genderColor],
+            }}>
+            <Text>{item.gender}</Text>
+          </View>
+        )}
+        {item?.birth_year != 'n/a' && (
+          <View
+            style={{
+              ...styles.genderContainer,
+              backgroundColor: colors.BLUE,
+            }}>
+            <Text>{item.birth_year}</Text>
+          </View>
+        )}
+      </View>
     </View>
   );
 };
@@ -34,12 +59,21 @@ export default PersonItem;
 const styles = StyleSheet.create({
   personItem: {
     flex: 1,
+    gap: 12,
     backgroundColor: colors.BG2,
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
   },
-
+  tagContainer: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  genderContainer: {
+    borderRadius: 12,
+    alignSelf: 'flex-start',
+    paddingHorizontal: 12,
+  },
   round: {
     width: 50,
     height: 50,
