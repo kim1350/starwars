@@ -2,23 +2,24 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors, stylesConst} from '../../../constants';
 import {Person} from '../../../types/Person';
+import PressableAnimation from '../../ui/PressableAnimation';
 interface IPersonItem {
   item: Person;
-  index: number;
+  index?: number;
+  onPressItem: (() => void) | undefined;
 }
-const PersonItem = ({item}: IPersonItem) => {
+const PersonItem = ({item, onPressItem}: IPersonItem) => {
   const genderColor = {
     male: colors.GREEN,
     female: colors.PURPLE,
     hermaphrodite: colors.YELLOW,
   };
   return (
-    <View style={styles.personItem}>
-      <Text style={stylesConst.text_title_18m}>{item?.name}</Text>
-      <View style={{flexDirection: 'row', gap: 12}}>
-        {item?.height != 'n/a' &&
-          item?.height != 'unknown' &&
-          item?.height != 'none' && (
+    <PressableAnimation scaleValue={0.95} onPress={onPressItem}>
+      <View style={styles.personItem}>
+        <Text style={stylesConst.text_title_18m}>{item?.name}</Text>
+        <View style={{flexDirection: 'row', gap: 12}}>
+          {!['n/a', 'unknown', 'none'].includes(item?.height) && (
             <View style={{alignItems: 'center'}}>
               <View style={styles.round}>
                 <Text>{item?.height}</Text>
@@ -26,33 +27,27 @@ const PersonItem = ({item}: IPersonItem) => {
               <Text>height</Text>
             </View>
           )}
-        {item?.mass != 'n/a' &&
-          item?.mass != 'unknown' &&
-          item?.mass != 'none' && (
+          {!['n/a', 'unknown', 'none'].includes(item?.mass) && (
             <View style={{alignItems: 'center'}}>
               <View style={styles.round}>
-                <Text>{item?.mass}</Text>
+                <Text>{item.mass}</Text>
               </View>
               <Text>mass</Text>
             </View>
           )}
-      </View>
-      <View style={styles.tagContainer}>
-        {item?.gender != 'n/a' &&
-          item?.gender != 'unknown' &&
-          item?.gender != 'none' && (
+        </View>
+        <View style={styles.tagContainer}>
+          {!['n/a', 'unknown', 'none'].includes(item?.gender) && (
             <View
               style={{
                 ...styles.genderContainer,
                 backgroundColor:
                   genderColor[item.gender as keyof typeof genderColor],
               }}>
-              <Text>{item?.gender}</Text>
+              <Text>{item.gender}</Text>
             </View>
           )}
-        {item?.birth_year != 'n/a' &&
-          item?.birth_year != 'unknown' &&
-          item?.birth_year != 'none' && (
+          {!['n/a', 'unknown', 'none'].includes(item.birth_year) && (
             <View
               style={{
                 ...styles.genderContainer,
@@ -61,8 +56,9 @@ const PersonItem = ({item}: IPersonItem) => {
               <Text>{item?.birth_year}</Text>
             </View>
           )}
+        </View>
       </View>
-    </View>
+    </PressableAnimation>
   );
 };
 

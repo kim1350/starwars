@@ -13,6 +13,8 @@ import {getPersons} from '../../../store/presonSlice';
 import {useAppDispatch, useAppSelector} from '../../../hooks/hooks';
 import PersonItem from './PersonItem';
 import {Dropdown} from 'react-native-element-dropdown';
+import ModalPerson from './ModalPerson';
+import {Person} from '../../../types/Person';
 const options = [
   {label: 'all', value: 'all'},
   {label: 'brown', value: 'brown'},
@@ -24,9 +26,10 @@ const CharactersScreen = () => {
   const dispatch = useAppDispatch();
   const {data, error, loadData, next} = useAppSelector(state => state.preson);
   const [page, setPage] = useState<number>(1);
+  const [showModa, setShowModal] = useState<boolean>(false);
   const [select, setSelect] = useState<string>('all');
   const [isRefetching, setIsRefetching] = useState<boolean>(false);
-
+  const [selectedItem, setSelectedItem] = useState<Person | null>(null);
   useEffect(() => {
     dispatch(getPersons(page));
   }, []);
@@ -96,8 +99,22 @@ const CharactersScreen = () => {
         contentContainerStyle={{gap: 12, padding: 20}}
         ListEmptyComponent={loadData ? <ActivityIndicator size={40} /> : null}
         renderItem={({item, index}) => {
-          return <PersonItem item={item} index={index} />;
+          return (
+            <PersonItem
+              item={item}
+              index={index}
+              onPressItem={() => {
+                setSelectedItem(item);
+                setShowModal(true);
+              }}
+            />
+          );
         }}
+      />
+      <ModalPerson
+        item={selectedItem}
+        isVisible={showModa}
+        setVisible={setShowModal}
       />
     </View>
   );
