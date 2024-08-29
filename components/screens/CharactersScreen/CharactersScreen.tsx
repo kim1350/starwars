@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   FlatList,
   RefreshControl,
+  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -65,58 +66,63 @@ const CharactersScreen = () => {
     );
   }
   return (
-    <View style={styles.container}>
-      <Dropdown
-        data={options}
-        labelField="label"
-        valueField="value"
-        onChange={({value}) => {
-          setSelect(value);
-        }}
-        value={select}
-        containerStyle={styles.dropdownContainer}
-        style={styles.dropdown}
-      />
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.container}>
+        <Dropdown
+          data={options}
+          labelField="label"
+          valueField="value"
+          onChange={({value}) => {
+            setSelect(value);
+          }}
+          value={select}
+          containerStyle={styles.dropdownContainer}
+          style={styles.dropdown}
+        />
 
-      <FlatList
-        ListHeaderComponent={
-          <Text style={styles.title}>
-            60 Peoples for you to choose your favorite
-          </Text>
-        }
-        refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={handleRefetch} />
-        }
-        data={filteredData}
-        ListFooterComponent={
-          next != null ? (
-            <TouchableOpacity onPress={getNextData}>
-              <Text style={stylesConst.text_title_16m}>Load more...</Text>
-            </TouchableOpacity>
-          ) : undefined
-        }
-        keyExtractor={(item, index) => item.created + '' + index}
-        contentContainerStyle={{gap: 12, padding: 20}}
-        ListEmptyComponent={loadData ? <ActivityIndicator size={40} /> : null}
-        renderItem={({item, index}) => {
-          return (
-            <PersonItem
-              item={item}
-              index={index}
-              onPressItem={() => {
-                setSelectedItem(item);
-                setShowModal(true);
-              }}
+        <FlatList
+          ListHeaderComponent={
+            <Text style={styles.title}>
+              60 Peoples for you to choose your favorite
+            </Text>
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={handleRefetch}
             />
-          );
-        }}
-      />
-      <ModalPerson
-        item={selectedItem}
-        isVisible={showModa}
-        setVisible={setShowModal}
-      />
-    </View>
+          }
+          data={filteredData}
+          ListFooterComponent={
+            next != null ? (
+              <TouchableOpacity onPress={getNextData}>
+                <Text style={stylesConst.text_title_16m}>Load more...</Text>
+              </TouchableOpacity>
+            ) : undefined
+          }
+          keyExtractor={(item, index) => item.created + '' + index}
+          contentContainerStyle={{gap: 12, padding: 20}}
+          ListEmptyComponent={loadData ? <ActivityIndicator size={40} /> : null}
+          renderItem={({item, index}) => {
+            return (
+              <PersonItem
+                item={item}
+                index={index}
+                onPressItem={() => {
+                  setSelectedItem(item);
+                  setShowModal(true);
+                }}
+              />
+            );
+          }}
+        />
+        <ModalPerson
+          item={selectedItem}
+          isVisible={showModa}
+          setVisible={setShowModal}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,42 +1,51 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {colors, stylesConst} from '../../../constants';
 
 const HomeScreen = ({navigation}: any) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.container2}>
-        <Text style={styles.title}>Find all your favorite character</Text>
-        <Text style={styles.text}>
-          You can find out all the information about your favorite characters
-        </Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Characters');
-        }}
-        style={styles.btn}>
-        <Text style={stylesConst.text_title_18m}>See more...</Text>
-      </TouchableOpacity>
-      <View style={styles.containerImgs}>
-        <Image
-          source={require('../../../assets/Cloud.png')}
-          height={120}
-          width={252}
-          style={styles.cloud1}
-        />
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.container}>
+        <View style={styles.container2}>
+          <Text style={styles.title}>Find all your favorite character</Text>
+          <Text style={styles.text}>
+            You can find out all the information about your favorite characters
+          </Text>
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Characters');
+          }}
+          style={styles.btn}>
+          <Text style={stylesConst.text_title_18m}>See more...</Text>
+        </TouchableOpacity>
+        <View style={styles.containerImgs}>
+          <Image
+            source={require('../../../assets/Cloud.png')}
+            height={120}
+            width={252}
+            style={styles.cloud1}
+          />
 
-        <Image
-          source={require('../../../assets/Yoda.png')}
-          style={styles.yoda}
-        />
-        <Image
-          source={require('../../../assets/Cloud.png')}
-          resizeMode="contain"
-          style={styles.cloud2}
-        />
+          <Image
+            source={require('../../../assets/Yoda.png')}
+            style={styles.yoda}
+          />
+          <Image
+            source={require('../../../assets/Cloud.png')}
+            resizeMode="contain"
+            style={styles.cloud2}
+          />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
